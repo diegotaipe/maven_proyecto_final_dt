@@ -14,7 +14,7 @@ public class Auto {
 	protected String avaluo;
 	protected LocalDate fechaReserva;
 	protected LocalDate fechaEntrega;
-	protected Usuario usuario;
+	protected Usuario cedula;
 	protected Automovil automovil;
 	protected Camioneta camioneta;
 	
@@ -78,13 +78,13 @@ public class Auto {
 	public void setFechaEntrega(LocalDate fechaEntrega) {
 		this.fechaEntrega = fechaEntrega;
 	}
-	public Usuario getUsuario() {
-		return usuario;
-	}
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
 	
+	public Usuario getCedula() {
+		return cedula;
+	}
+	public void setCedula(Usuario cedula) {
+		this.cedula = cedula;
+	}
 	public Automovil getAutomovil() {
 		return automovil;
 	}
@@ -100,10 +100,10 @@ public class Auto {
 	}
 	@Override
 	public String toString() {
-		return "Auto [estado=" + estado + ", placa=" + placa + ", modelo=" + modelo + ", marca=" + marca
-				+ ", anioFabricacion=" + anioFabricacion + ", paisFabricacion=" + paisFabricacion + ", cilindraje="
-				+ cilindraje + ", avaluo=" + avaluo + ", fechaReserva=" + fechaReserva + ", fechaEntrega="
-				+ fechaEntrega + ", usuario=" + usuario + ", automovil=" + automovil + ", camioneta=" + camioneta + "]";
+		return "Auto Estado: " + estado + " - Placa: " + placa + " - Modelo: " + modelo + " - Marca: " + marca
+				+ " - Año Fabricacion: " + anioFabricacion + " - Pais Fabricacion: " + paisFabricacion + " - Cilindraje: "
+				+ cilindraje + " - Avaluo: " + avaluo + " - Fecha Reserva: " + fechaReserva + " - Fecha Entrega: "
+				+ fechaEntrega + " - Usuario: " + cedula + " - automovil: " + automovil + " - Camioneta: " + camioneta;
 	}
 
 

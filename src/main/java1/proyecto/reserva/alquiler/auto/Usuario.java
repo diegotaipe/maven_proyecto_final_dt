@@ -1,7 +1,7 @@
 package proyecto.reserva.alquiler.auto;
 
 public class Usuario {
-	private String cedula;
+	protected String cedula;
 
 	public String getCedula() {
 		return cedula;
@@ -13,7 +13,7 @@ public class Usuario {
 
 	@Override
 	public String toString() {
-		return "Usuario [cedula=" + cedula + "]";
+		return cedula;
 	}
 	
 	
