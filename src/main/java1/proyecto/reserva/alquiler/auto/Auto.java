@@ -100,7 +100,7 @@ public class Auto {
 	}
 	@Override
 	public String toString() {
-		return "Auto Estado: " + estado + " - Placa: " + placa + " - Modelo: " + modelo + " - Marca: " + marca
+		return "\nAuto Estado: " + estado + " - Placa: " + placa + " - Modelo: " + modelo + " - Marca: " + marca
 				+ " - Año Fabricacion: " + anioFabricacion + " - Pais Fabricacion: " + paisFabricacion + " - Cilindraje: "
 				+ cilindraje + " - Avaluo: " + avaluo + " - Fecha Reserva: " + fechaReserva + " - Fecha Entrega: "
 				+ fechaEntrega + " - Usuario: " + cedula + " - automovil: " + automovil + " - Camioneta: " + camioneta;

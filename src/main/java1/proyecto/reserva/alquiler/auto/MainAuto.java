@@ -44,19 +44,24 @@ public class MainAuto extends Auto {
 						// Cliente: Consultar auto
 						System.out.println("Ingrese Modelo o marca: ");
 						String busquedaModeloMarca = lectorString.nextLine();
+						boolean resultadoBuscar=true;
 						for (int i = 0; i < listadoAutos.length; i++) {
 							Auto busquedaAuto = listadoAutos[i];
 							boolean encontrar = busquedaAuto.getModelo().equals(busquedaModeloMarca);
 							boolean encontrar2 = busquedaAuto.getMarca().equals(busquedaModeloMarca);
-
 							if (encontrar == true || encontrar2 == true) {
 								System.out.println("Placa: " + listadoAutos[i].getPlaca() + " - Modelo: "
 										+ listadoAutos[i].getModelo() + " - Marca: " + listadoAutos[i].getMarca()
 										+ " - Año: " + listadoAutos[i].getAnioFabricacion() + " - Estado: "
 										+ listadoAutos[i].getEstado() + " - Fecha Entrega: "
 										+ listadoAutos[i].getFechaEntrega());
+							}else if(encontrar==false&&encontrar2==false){
+								resultadoBuscar=false;
 							}
 
+						}
+						if(resultadoBuscar==false) {
+							System.out.println("Auto no encontrado");
 						}
 
 					} else if (opcionMenuCliente.equals("b")) {
@@ -66,28 +71,25 @@ public class MainAuto extends Auto {
 						String busquedaPlaca = lectorString.nextLine();
 						System.out.println("Ingrese cedula: ");
 						String cedula = lectorString.nextLine();
-
+						boolean resultado=true;
 						for (int i = 0; i < listadoAutos.length; i++) {
 							Auto busquedaAuto = listadoAutos[i];
 							boolean encontrar = busquedaAuto.getPlaca().equals(busquedaPlaca);
 							if (encontrar == true) {
 								if (busquedaAuto.getEstado().equals("Disponible")) {
 									busquedaAuto.setEstado("Reservado");
-//									Auto fechaReserva =listadoAutos[i];
 									busquedaAuto.setFechaReserva(diaHoy);
 									busquedaAuto.setFechaEntrega(diaEntrega);
-									
-									System.out.println(diaHoy.format(DateTimeFormatter.ofPattern("dd MMMM yyyy")));
 									
 									Usuario cedula1 = new Usuario();
 									cedula1.setCedula(cedula);
 									Auto cedula11 = listadoAutos[i];
 									cedula11.setCedula(cedula1);
-									System.out.println(listadoAutos[i].getFechaEntrega());
+//									System.out.println(listadoAutos[i].getFechaEntrega());
 									System.out.println("El auto ha sido correctamente [Reservado]");
 									System.out.println("Por favor, debe pasarlo a retirar en el patio de autos");
 									
-									System.out.print(listadoAutos[i]);
+//									System.out.print(listadoAutos[i]);
 								} else {
 									System.out.println("El auto no está disponible");
 									// Impresion solo de fecha del arreglo
@@ -97,8 +99,12 @@ public class MainAuto extends Auto {
 								}
 
 							} else {
-								System.out.println("Auto no encontrado");
+								resultado=false;
+//								System.out.println("Auto no encontrado");
 							}
+						}
+						if(resultado==false) {
+							System.out.println("Auto no encontrado");
 						}
 					}
 
@@ -184,7 +190,7 @@ public class MainAuto extends Auto {
 						// Empleado: Alquilar un auto
 						System.out.print("Ingrese placa del auto: ");
 						String busquedaPlaca = lectorString.nextLine();
-
+						boolean resultado=true;
 						for (int i = 0; i < listadoAutos.length; i++) {
 							Auto busquedaAuto = listadoAutos[i];
 							boolean encontrar = busquedaAuto.getPlaca().equals(busquedaPlaca);
@@ -204,14 +210,19 @@ public class MainAuto extends Auto {
 										System.out.println("placa: " + listadoAutos[i].getPlaca());
 										System.out.println("Entregar el auto el: " + listadoAutos[i].getFechaEntrega()
 												.format(DateTimeFormatter.ofPattern("dd MMMM yyyy")));
-										System.out.println(listadoAutos[i]);
+//										System.out.println(listadoAutos[i]);
 									}
 								} while (!opcion.equals("1") && !opcion.equals("2"));
 
 							} else {
-								System.out.println("El auto no está disponible o no fue reservado");
+								resultado=false;
+//								System.out.println("El auto no está disponible o no fue reservado");
 							}
 						}
+						if(resultado==false) {
+							System.out.println("El auto no está disponible o no fue reservado");
+						}
+						
 
 					} else if (opcionMenuEmpleado.equals("c")) {
 						// Empleado: Aplazar fecha de entrega
@@ -222,15 +233,16 @@ public class MainAuto extends Auto {
 
 						for (int i = 0; i < listadoAutos.length; i++) {
 							Auto busquedaAuto = listadoAutos[i];
-							Usuario cedula1 = new Usuario();
-							cedula1.setCedula(cedulaCliente);
+							busquedaAuto.getCedula();
+//							Usuario cedula1 = new Usuario();
+//							cedula1.getCedula();
 							boolean encontrar3 = busquedaAuto.getPlaca().equals(busquedaPlaca)
 									&& busquedaAuto.getEstado().equals("Alquilado");
-							boolean encontrar4 = busquedaAuto.getCedula().equals(cedula1);
+							boolean encontrar4 = busquedaAuto.getCedula().equals(cedulaCliente);
 
-							System.out.println(listadoAutos[i].getCedula() + "  " + cedula1);
+							System.out.println(listadoAutos[i].getCedula() + "  " + cedulaCliente);
 
-							if (encontrar3 == true && encontrar4 == false) {// No reconoce igualdad cedula
+							if (encontrar3 == true || encontrar4 == true) {//Cedula
 								System.out.println("Placa: " + listadoAutos[i].getPlaca() + " - Modelo: "
 										+ listadoAutos[i].getModelo() + " - Estado: " + listadoAutos[i].getEstado()
 										+ " - Fecha Entrega: "
