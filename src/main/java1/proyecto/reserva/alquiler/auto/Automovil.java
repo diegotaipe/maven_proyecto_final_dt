@@ -15,5 +15,5 @@ public class Automovil {
 	public String toString() {
 		return "Automovil [numeroPuertas=" + numeroPuertas + "]";
 	}
-	
+
 }

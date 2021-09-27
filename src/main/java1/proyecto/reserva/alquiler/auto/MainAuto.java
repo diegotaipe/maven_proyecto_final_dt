@@ -19,7 +19,7 @@ public class MainAuto extends Auto {
 		int posicion = 0;
 		LocalDate diaHoy = LocalDate.now();
 		LocalDate diaEntrega = LocalDate.now().plusDays(2);
-		
+
 		System.out.println(diaHoy.format(DateTimeFormatter.ofPattern("dd MMMM yyyy")));
 
 		Auto listadoAutos[] = new Auto[0];
@@ -44,7 +44,7 @@ public class MainAuto extends Auto {
 						// Cliente: Consultar auto
 						System.out.println("Ingrese Modelo o marca: ");
 						String busquedaModeloMarca = lectorString.nextLine();
-						boolean resultadoBuscar=true;
+						boolean resultadoBuscar = true;
 						for (int i = 0; i < listadoAutos.length; i++) {
 							Auto busquedaAuto = listadoAutos[i];
 							boolean encontrar = busquedaAuto.getModelo().equals(busquedaModeloMarca);
@@ -55,12 +55,12 @@ public class MainAuto extends Auto {
 										+ " - Año: " + listadoAutos[i].getAnioFabricacion() + " - Estado: "
 										+ listadoAutos[i].getEstado() + " - Fecha Entrega: "
 										+ listadoAutos[i].getFechaEntrega());
-							}else if(encontrar==false&&encontrar2==false){
-								resultadoBuscar=false;
+							} else if (encontrar == false && encontrar2 == false) {
+								resultadoBuscar = false;
 							}
 
 						}
-						if(resultadoBuscar==false) {
+						if (resultadoBuscar == false) {
 							System.out.println("Auto no encontrado");
 						}
 
@@ -71,7 +71,7 @@ public class MainAuto extends Auto {
 						String busquedaPlaca = lectorString.nextLine();
 						System.out.println("Ingrese cedula: ");
 						String cedula = lectorString.nextLine();
-						boolean resultado=true;
+						boolean resultado = true;
 						for (int i = 0; i < listadoAutos.length; i++) {
 							Auto busquedaAuto = listadoAutos[i];
 							boolean encontrar = busquedaAuto.getPlaca().equals(busquedaPlaca);
@@ -80,7 +80,7 @@ public class MainAuto extends Auto {
 									busquedaAuto.setEstado("Reservado");
 									busquedaAuto.setFechaReserva(diaHoy);
 									busquedaAuto.setFechaEntrega(diaEntrega);
-									
+
 									Usuario cedula1 = new Usuario();
 									cedula1.setCedula(cedula);
 									Auto cedula11 = listadoAutos[i];
@@ -88,7 +88,7 @@ public class MainAuto extends Auto {
 //									System.out.println(listadoAutos[i].getFechaEntrega());
 									System.out.println("El auto ha sido correctamente [Reservado]");
 									System.out.println("Por favor, debe pasarlo a retirar en el patio de autos");
-									
+
 //									System.out.print(listadoAutos[i]);
 								} else {
 									System.out.println("El auto no está disponible");
@@ -99,11 +99,11 @@ public class MainAuto extends Auto {
 								}
 
 							} else {
-								resultado=false;
+								resultado = false;
 //								System.out.println("Auto no encontrado");
 							}
 						}
-						if(resultado==false) {
+						if (resultado == false) {
 							System.out.println("Auto no encontrado");
 						}
 					}
@@ -190,7 +190,7 @@ public class MainAuto extends Auto {
 						// Empleado: Alquilar un auto
 						System.out.print("Ingrese placa del auto: ");
 						String busquedaPlaca = lectorString.nextLine();
-						boolean resultado=true;
+						boolean resultado = true;
 						for (int i = 0; i < listadoAutos.length; i++) {
 							Auto busquedaAuto = listadoAutos[i];
 							boolean encontrar = busquedaAuto.getPlaca().equals(busquedaPlaca);
@@ -215,14 +215,13 @@ public class MainAuto extends Auto {
 								} while (!opcion.equals("1") && !opcion.equals("2"));
 
 							} else {
-								resultado=false;
+								resultado = false;
 //								System.out.println("El auto no está disponible o no fue reservado");
 							}
 						}
-						if(resultado==false) {
+						if (resultado == false) {
 							System.out.println("El auto no está disponible o no fue reservado");
 						}
-						
 
 					} else if (opcionMenuEmpleado.equals("c")) {
 						// Empleado: Aplazar fecha de entrega
@@ -242,7 +241,7 @@ public class MainAuto extends Auto {
 
 							System.out.println(listadoAutos[i].getCedula() + "  " + cedulaCliente);
 
-							if (encontrar3 == true || encontrar4 == true) {//Cedula
+							if (encontrar3 == true || encontrar4 == true) {// Cedula
 								System.out.println("Placa: " + listadoAutos[i].getPlaca() + " - Modelo: "
 										+ listadoAutos[i].getModelo() + " - Estado: " + listadoAutos[i].getEstado()
 										+ " - Fecha Entrega: "

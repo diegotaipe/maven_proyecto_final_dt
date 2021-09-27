@@ -16,6 +16,4 @@ public class Camioneta {
 		return "Camioneta [pesoSoportado=" + pesoSoportado + "]";
 	}
 
-
-	
 }
