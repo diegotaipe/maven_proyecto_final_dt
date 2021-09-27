@@ -18,6 +18,8 @@ public class MainAuto extends Auto {
 		String opcion;
 		int posicion = 0;
 		LocalDate diaHoy = LocalDate.now();
+		LocalDate diaEntrega = LocalDate.now().plusDays(2);
+		
 		System.out.println(diaHoy.format(DateTimeFormatter.ofPattern("dd MMMM yyyy")));
 
 		Auto listadoAutos[] = new Auto[0];
@@ -45,17 +47,18 @@ public class MainAuto extends Auto {
 						for (int i = 0; i < listadoAutos.length; i++) {
 							Auto busquedaAuto = listadoAutos[i];
 							boolean encontrar = busquedaAuto.getModelo().equals(busquedaModeloMarca);
-							boolean encontrar2 = busquedaAuto.getMarca().equals(busquedaModeloMarca);							
-						
+							boolean encontrar2 = busquedaAuto.getMarca().equals(busquedaModeloMarca);
+
 							if (encontrar == true || encontrar2 == true) {
 								System.out.println("Placa: " + listadoAutos[i].getPlaca() + " - Modelo: "
 										+ listadoAutos[i].getModelo() + " - Marca: " + listadoAutos[i].getMarca()
-										+ " - Año: " + listadoAutos[i].getAnioFabricacion()
-										+ " - Estado: " + listadoAutos[i].getEstado()+" - Fecha Entrega: "+listadoAutos[i].getFechaEntrega());
+										+ " - Año: " + listadoAutos[i].getAnioFabricacion() + " - Estado: "
+										+ listadoAutos[i].getEstado() + " - Fecha Entrega: "
+										+ listadoAutos[i].getFechaEntrega());
 							}
-							
+
 						}
-						
+
 					} else if (opcionMenuCliente.equals("b")) {
 						// Cliente: Reservar auto
 						System.out.println("--- Reserva de autos ---");
@@ -70,16 +73,21 @@ public class MainAuto extends Auto {
 							if (encontrar == true) {
 								if (busquedaAuto.getEstado().equals("Disponible")) {
 									busquedaAuto.setEstado("Reservado");
-									System.out.println(diaHoy.format(DateTimeFormatter.ofPattern("dd MMMM yyyy")));
+//									Auto fechaReserva =listadoAutos[i];
 									busquedaAuto.setFechaReserva(diaHoy);
-
+									busquedaAuto.setFechaEntrega(diaEntrega);
+									
+									System.out.println(diaHoy.format(DateTimeFormatter.ofPattern("dd MMMM yyyy")));
+									
 									Usuario cedula1 = new Usuario();
 									cedula1.setCedula(cedula);
 									Auto cedula11 = listadoAutos[i];
 									cedula11.setCedula(cedula1);
+									System.out.println(listadoAutos[i].getFechaEntrega());
 									System.out.println("El auto ha sido correctamente [Reservado]");
 									System.out.println("Por favor, debe pasarlo a retirar en el patio de autos");
-//									System.out.print(listadoAutos[i]);
+									
+									System.out.print(listadoAutos[i]);
 								} else {
 									System.out.println("El auto no está disponible");
 									// Impresion solo de fecha del arreglo
@@ -88,7 +96,7 @@ public class MainAuto extends Auto {
 
 								}
 
-							}else {
+							} else {
 								System.out.println("Auto no encontrado");
 							}
 						}
@@ -183,7 +191,9 @@ public class MainAuto extends Auto {
 							if (encontrar == true && busquedaAuto.getEstado().equals("Reservado")) {
 								System.out.println("Placa: " + listadoAutos[i].getPlaca() + " - Modelo: "
 										+ listadoAutos[i].getModelo() + " - Estado: " + listadoAutos[i].getEstado()
-										+ " - Fecha Entrega: " + listadoAutos[i].getFechaEntrega().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+										+ " - Fecha Entrega: "
+										+ listadoAutos[i].getFechaEntrega()
+												.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
 										+ " - Reservado por: " + listadoAutos[i].getCedula());
 								do {
 									System.out.println("1. Alquilar");
@@ -192,10 +202,11 @@ public class MainAuto extends Auto {
 									if (opcion.equals("1")) {
 										busquedaAuto.setEstado("Alquilado");
 										System.out.println("placa: " + listadoAutos[i].getPlaca());
-										System.out.println("Entregar el auto el: " + listadoAutos[i].getFechaEntrega().format(DateTimeFormatter.ofPattern("dd MMMM yyyy")));
+										System.out.println("Entregar el auto el: " + listadoAutos[i].getFechaEntrega()
+												.format(DateTimeFormatter.ofPattern("dd MMMM yyyy")));
 										System.out.println(listadoAutos[i]);
 									}
-								} while (!opcion.equals("1")&&!opcion.equals("2"));
+								} while (!opcion.equals("1") && !opcion.equals("2"));
 
 							} else {
 								System.out.println("El auto no está disponible o no fue reservado");
@@ -213,7 +224,8 @@ public class MainAuto extends Auto {
 							Auto busquedaAuto = listadoAutos[i];
 							Usuario cedula1 = new Usuario();
 							cedula1.setCedula(cedulaCliente);
-							boolean encontrar3 = busquedaAuto.getPlaca().equals(busquedaPlaca);
+							boolean encontrar3 = busquedaAuto.getPlaca().equals(busquedaPlaca)
+									&& busquedaAuto.getEstado().equals("Alquilado");
 							boolean encontrar4 = busquedaAuto.getCedula().equals(cedula1);
 
 							System.out.println(listadoAutos[i].getCedula() + "  " + cedula1);
@@ -221,23 +233,25 @@ public class MainAuto extends Auto {
 							if (encontrar3 == true && encontrar4 == false) {// No reconoce igualdad cedula
 								System.out.println("Placa: " + listadoAutos[i].getPlaca() + " - Modelo: "
 										+ listadoAutos[i].getModelo() + " - Estado: " + listadoAutos[i].getEstado()
-										+ " - Fecha Entrega: " + listadoAutos[i].getFechaEntrega().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+										+ " - Fecha Entrega: "
+										+ listadoAutos[i].getFechaEntrega()
+												.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
 										+ " - Alquilado por: " + listadoAutos[i].getCedula());
 								do {
 									System.out.println("1. Aplazar");
 									System.out.println("2. No Aplazar");
 									opcion = lectorString.nextLine();
-									
+
 									switch (opcion) {
 
 									case "1":
 										Auto aplazarFecha = listadoAutos[i];
-										LocalDate aplazarF=listadoAutos[i].getFechaEntrega().plusDays(3);
+										LocalDate aplazarF = listadoAutos[i].getFechaEntrega().plusDays(3);
 										aplazarFecha.setFechaEntrega(aplazarF);
-										
+
 										System.out.println("Aplazamiento de 3 días");
-										System.out.println("Entregar el auto el:  "
-												+ listadoAutos[i].getFechaEntrega().format(DateTimeFormatter.ofPattern("dd MMMMM yyyy")));
+										System.out.println("Entregar el auto el:  " + listadoAutos[i].getFechaEntrega()
+												.format(DateTimeFormatter.ofPattern("dd MMMM yyyy")));
 //										
 										break;
 									case "2":
@@ -245,7 +259,7 @@ public class MainAuto extends Auto {
 										break;
 
 									}
-								} while (!opcion.equals("1")&&!opcion.equals("2"));
+								} while (!opcion.equals("1") && !opcion.equals("2"));
 
 							} else {
 								System.out.println("Auto no encontrado, Datos erróneos");
