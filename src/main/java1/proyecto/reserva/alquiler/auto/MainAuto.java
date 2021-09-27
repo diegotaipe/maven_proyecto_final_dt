@@ -19,18 +19,19 @@ public class MainAuto extends Auto {
 		int posicion = 0;
 		LocalDate diaHoy = LocalDate.now();
 		LocalDate diaEntrega = LocalDate.now().plusDays(2);
-
-		System.out.println(diaHoy.format(DateTimeFormatter.ofPattern("dd MMMM yyyy")));
+		
+		System.out.println("Fecha Actual: "+diaHoy.format(DateTimeFormatter.ofPattern("dd MMMM yyyy")));
 
 		Auto listadoAutos[] = new Auto[0];
 
 		do {
 			System.out.println();
-			System.out.println("------------------------");
+			System.out.println("------- Metrocard -------");
+			System.out.println("-------------------------");
 			System.out.println("1. Clientes ");
 			System.out.println("2. Empleado ");
 			System.out.println("3. SALIR ");
-			System.out.println("------------------------");
+			System.out.println("-------------------------");
 			opcionMenu = lectorString.nextLine();
 
 			if (opcionMenu.equals("1")) {
@@ -233,8 +234,6 @@ public class MainAuto extends Auto {
 						for (int i = 0; i < listadoAutos.length; i++) {
 							Auto busquedaAuto = listadoAutos[i];
 							busquedaAuto.getCedula();
-//							Usuario cedula1 = new Usuario();
-//							cedula1.getCedula();
 							boolean encontrar3 = busquedaAuto.getPlaca().equals(busquedaPlaca)
 									&& busquedaAuto.getEstado().equals("Alquilado");
 							boolean encontrar4 = busquedaAuto.getCedula().equals(cedulaCliente);
@@ -252,7 +251,7 @@ public class MainAuto extends Auto {
 									System.out.println("1. Aplazar");
 									System.out.println("2. No Aplazar");
 									opcion = lectorString.nextLine();
-
+									
 									switch (opcion) {
 
 									case "1":
